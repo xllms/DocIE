@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Universal Document-level Infroamtion Extraction.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--     <title>XLLM ACL 2025 Shared Task-II: Speech Event Extraction</title> -->
+    <title>DocIE @BIGAI 2025</title>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-PYVRSFMDRL');
+    </script>
+
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+    <link rel="stylesheet" href="./static/css/bulma.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="stylesheet" href="./static/css/index.css">
+    <link rel="icon" href="">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="./static/js/fontawesome.all.min.js"></script>
+    <script src="./static/js/bulma-carousel.min.js"></script>
+    <script src="./static/js/bulma-slider.min.js"></script>
+    <!--  <script src="./static/js/index.js"></script>-->
+    <style>
+        pre {outline: 1px solid #ccc; }
+         .string { color: green; }
+         .number { color: darkorange; }
+         .boolean { color: blue; }
+         .null { color: magenta; }
+         .key { color: red; }
+        ._table{width: 100%; border-collapse: collapse; border:0px;}
+        ._table thead tr {font-size: 13px; color: #2e3b45;  text-align: center; background-color: rgba(230, 255, 250, 0.92); font-weight:bold;}
+        ._table td{line-height: 20px; text-align: center; padding: 4px 10px 3px 10px; height: 18px;border: 0px solid #ffffff;}
+        ._table tbody tr {background: #fff; font-size: 13px; color: #393939;}
+        ._table tbody tr:nth-child(2n){ background: #f3f3f3;}
+    </style>
+</head>
+
+<body>
+
+    <section class="hero">
+        <div class="hero-body">
+            <div class="container is-max-desktop">
+                <div class="columns is-centered">
+                    <div class="column has-text-centered">
+                        <h1 class="title is-1 publication-title"><a href="https://xllms.github.io/">BIGAI</a> @ ACL 2025 Shared Task-II:</h1>
+                        <h1 class="title is-1 publication-title">Universal Document-level Information Extraction (<a href="https://speechee.github.io/">DocIE</a>)</h1>
+                        
+
+                        <div class="column has-text-centered">
+                            <div class="publication-links">
+
+                                                            
+                                <!-- Data Link. -->
+                                <span class="link-block">
+                                    <a href="#introduction"
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span>Introduction</span>
+                                    </a>
+                                </span>
+                                
+                                <!-- Data Link. -->
+                                <span class="link-block">
+                                    <a href="#dataset"
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span>Dataset</span>
+                                    </a>
+                                </span>
+                                <!-- Paper Link. -->
+                                <span class="link-block">
+                                    <a href="#task"
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span>Task & Evaluation</span>
+                                    </a>
+                                </span>
+                                <!-- Code Link. -->
+
+                                
+                                <span class="link-block">
+                                    <a href="https://github.com/SpeechEE/SpeechEE"
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span>Code</span>
+                                    </a>
+                                </span>
+                                <span class="link-block">
+                                    <a href="#submission"
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span>Submission</span>
+                                    </a>
+                                </span>
+
+                                
+
+                                <span class="link-block">
+                                    <a href="#timeline"
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span>Timeline</span>
+                                    </a>
+                                </span>
+
+                                <span class="link-block">
+                                    <a href="https://www.codabench.org/competitions/4897/"
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span>CodaBench</span>
+                                    </a>
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <section class="section"style="margin-top: -50px;">
+        <div class="container is-max-desktop">
+
+            <!-- <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-3">Leaderboard</h2>
+                    <div class="content has-text-justified">
+                        <p>
+                            Congratulations to the winners!
+                        </p>
+                        <table class="._table table-bordered table-striped" align="center">
+                            <tbody align="center" valign="center">
+                            <tr>
+                                <td>Rank</td>
+                                <td>Team</td>
+                                <td>Score</td>
+                              </tr>
+                            <tr>
+                              <td>1</td>
+                              <td>Token</td>
+                              <td>63.2064</td>
+                            </tr>
+                            <tr>
+                              <td>2</td>
+                              <td>USTC-IAT-United</td>
+                              <td>62.1149</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>ppjj</td>
+                                <td>59.8638</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>GXU-LIPE</td>
+                                <td>59.6864</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>DMCV</td>
+                                <td>59.3998</td>
+                            </tr>
+                            
+                        </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div> -->
+            
+            <!-- Abstract. -->
+            <div id="introduction" class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-3">Introduction</h2>
+                    <div class="content has-text-justified">
+
+                        <div style="text-align: center;">
+                            <img src="static/images/overview_new.pdf" width="90%" alt="">
+                            <p><b>Overview: Universal Document-level Information Extraction Task.</b></p>
+                        </div>
+
+                        <p>
+                        We propose the Universal Document-level Information Extraction challenge on the this platform. DocIE aims to detect entities, the mention of the entities and relations from document-level corpus at the same time. Therefore, the DUIE is defined as: Given a paragraph consisting of a series of sentences, the goal is to extract structured information comprising four elements: 1) the entities type, 2) the relation triples.
+                        </p>
+
+                        
+                        <p>
+                            The challenge contains three subtasks as following:
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!--/ Abstract. -->
+
+            <!-- Paper video. -->
+            <div id="task" div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-3">Challenge Task Definition and Metrtics</h2>
+                    <div class="content has-text-justified">
+                        <div style="text-align: center;">
+                            <img src="static/images/task1_new.pdf" width="90%" alt="">
+                            <p><b>Task 1: Named Entity Recognition.</b></p>
+                        </div>
+                        <p>
+                            <b>Task-1:</b> Named Entity Recognition (NER) aims to identify named entities in the given paragraph and classify them into corresponding categories. Participants are required to develop models that can accurately extract the named entities and its type. A named entity is considered correctly extracted if it matches the gold standard entity and its corresponding type. The evaluation metric for this sub-task is the F1 score. <b>Unlike traditional sentence-level NER tasks, participants are also required to detemine the mention span for each entity within the paragraph.</b>
+                        </p>
+                        
+                        <!-- <div style="text-align: center;">
+                            <img src="static/images/task2.pdf" width="90%" alt="">
+                            <p><b>Task 2: Coreference.</b></p>
+                        </div>
+                        <p>
+                            <b>Task-2:</b>
+                            Coreference aims to identify the coreference relations between two or more mentions in the given paragraph. Participants are required to develop models that can accurately identify the coreference relations and their corresponding types. A coreference relation is considered correctly identified if it matches the gold standard relation and its corresponding type. The evaluation metric for this sub-task is the F1 score.
+                         <p> -->
+                        
+                        <div style="text-align: center;">
+                            <img src="static/images/task2_new.pdf" width="90%" alt="">
+                            <p><b>Task 2:  Relation Extraction.</b></p>
+                        </div>
+                        <p>
+                            <b>Task-2:</b> Relation Extraction (RE) aims to identify the relation between two entities in the given paragraph. Participants are required to develop models that can accurately identify the relation between two extracted entities. A relation is considered correctly identified if it matches the gold standard relation. The evaluation metric for this sub-task is the F1 score. <b>Unlike traditional sentence-level RE task, the entities in a relation triple may across multiple sentences, and the relations between entities may also be inferred from the context include multiple sentences.</b>
+
+                        </p>
+
+
+                        
+                        <div class="columns is-centered has-text-centered">
+                            <div>
+                                <h2 class="title is-3">Evaluation</h2>
+                                <div class="content has-text-justified">
+                                    <p>
+                          
+                                        The F1 score is computed using precision (P) and recall (R), which are calculated as follows:
+                                         <p>
+                                          <b><em>P = TP / ( TP + FP )</em></b>
+                                         </p>
+                                         <p>
+                                          <b><em>R = TP / ( TP + FN ) </em></b>
+                                         </p>
+                                         <p>
+                                          <b><em>F1 = 2 * P * R / ( P + R ) </em></b>
+                                         </p>
+                                       
+                                         where TP, FP, and FN represent specific items that are used to calculate the F1 score in the context of a Confusion_matrix.
+                                         In particular, when computing the micro-F1 score, TP corresponds to the number of predicted tuple that match exactly with those in the gold set. 
+                                         <div style="text-align: center;">
+                                            <img src="static/images/metric.pdf" width="90%" alt="">
+                                            <p><b>The metric in different settings.</b></p>
+                                        </div>
+                                        It is worth noting that our evaluation metrics consider <b>two different settings</b>. 
+
+                                        <p>
+                                        In the <b>common setting</b>, the NER task only needs to extract the corresponding entity and determine its type; the head and tail entities predicted by the RE task can be replaced by their mentions. 
+                                        </p>
+                                        <p>
+                                        In the <b>strict setting</b>, the NER task should give all the descriptions of the entity in the paragraph; the prediction results of the RE task should be strictly consistent with the Ground True.
+                                        </p>
+              
+                                         
+                                      </p>
+                                      <p>
+                                          Finally, we use the following score for ranking:
+                                      </p>
+                                      <p>
+                                               <b>Score<sub>common</sub>=<em>0.5*Task<sub>1_common</sub>+0.5*Task<sub>2_common</sub></em></b>
+                                      </p>
+                                      <p>
+                                        <b>Score<sub>strict</sub>=<em>0.5*Task<sub>1_strict</sub>+0.5*Task<sub>2_strict</sub></em></b>
+                                    </p>
+                                    <p>
+                                        <b>overall_score=<em>0.5* Score<sub>common</sub> +0.5* Score<sub>strict</sub></em></b>
+                                    </p>
+                                          We provide python scripts for evaluation, please refer to the <a href="#baseline">XXXXXXX codes</a> "/challenge/XXXXX.py".
+                       
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+             <!-- Datasets. -->
+            <div class="columns is-centered has-text-centered">
+                <div id="dataset" class="column is-four-fifths">
+                    <h2 class="title is-3">Dataset</h2>
+                    <div class="content has-text-justified">
+                        <div style="text-align: center;">
+                            <img src="static/images/statistic.png" width="90%" alt="">
+                            <p><b>Distribution of different tasks, domains, and source datasets within the DocIE.</b></p>
+                        </div>
+                        <p>
+                            The distribution of domains and source datasets within the DocIE, including XX domains and XX source datasets, is shown in the figure above. The DocIE is a comprehensive dataset that covers a wide range of domains and source datasets, making it a valuable resource for researchers and practitioners in the field of relation extraction.
+                        </p>
+
+                        <p>
+                            The dataset for this challenge is derived from WikiPedia. This dataset contains XXX,XXX entities and XXX,XXX relations, with XXX,XXX paragraphs for training your model. The detailed information is recorded in the <a href="#baseline">baseline codes</a> "/challenge/event-schema.json".
+                        </p>
+                        <p>
+                            Example of a sample:
+                        </p>
+                        <pre id="jsonShow">{
+    "domain": "Culture",
+    "title": "The_Triple_Package",
+    "doc": "The Triple Package: How Three Unlikely Traits Explain the Rise and Fall of Cultural Groups in America is a book published in 2014 by two professors at Yale Law School, Amy Chua and her husband, Jed Rubenfeld. Amy Chua is also the author of the 2011 international bestseller, Battle Hymn of the Tiger Mother.\nAccording to the preface, the authors find that \"certain groups do much better in America than others\u2014as measured by various socioeconomic indicators such as income, occupational status, job prestige, test scores, and so on\u2014 [which] is difficult to talk about. In large part this is because the topic feels racially charged.\" Nevertheless, the book attempts to debunk racial stereotypes by focusing on three \"cultural traits\" that attribute to success in the United States.\nFollowing Battle Hymn of the Tiger Mother in 2011, Chua wrote this book with her husband Jed Rubenfeld after observing a more prevalent trend of students from specific ethnic groups achieving better academic results than other ethnic groups. For example, ..........",
+    "triplets": [
+        {
+            "subject": "The Triple Package",
+            "relation": "ReviewedBy",
+            "object": "Colin Woodard"
+        },
+        {
+            "subject": "The Triple Package",
+            "relation": "Creator",
+            "object": "Jed Rubenfeld"
+        },
+        ... ...
+    ],
+    "entities": {
+        "088f003833d523d9dccc529e929afdc7": {
+            "mentions": [
+                "the United States",
+                "America",
+                "U.S.",
+                "American",
+                "the successful groups in the United States",
+                "the rest in America",
+                "the national average",
+                "the American dream",
+                "UK"
+            ],
+            "type": "GPE"
+        },
+        "ab350764d8b507100f7cbb1ee09bf7e7": {
+            "mentions": [
+                "Yale Law School",
+                "Yale"
+            ],
+            "type": "ORG"
+        },
+        ... ...
+    },
+    "label_set": ["ReviewedBy","NominatedFor","InfluencedBy","AwardReceived","HasWorksInTheCollection","Creator","PresentedIn","EthnicGroup","PublishedIn","Affiliation","OwnerOf","InvestigatedBy","CitesWork","HasPart","Acknowledged","DifferentFrom","Follows"]
+}
+</pre>
+                        <p>
+                            The datasets are avaliable on <a href="https://drive.google.com/file/d/1Ot7PN3fTwQ76Ij49UG-_Qt9TMBF_Bjio/view?usp=sharing">Google Drive</a> and the label json files are in the <a href="#baseline">baseline codes</a> "/challenge/data/ACE05EN".
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="columns is-centered has-text-centered">
+                <div id="timeline" class="column is-four-fifths">
+                    <h2 class="title is-3">Timeline</h2>
+                    <div class="content has-text-justified">
+                        <p>
+                            Please note: The submission deadline is at 11:59 p.m. (<a herf="https://www.timeanddate.com/time/zones/aoe" style="color:red">Anywhere on Earth</a>) of the stated deadline date.
+                        </p>
+                        <table class="._table table-bordered table-striped" align="center">
+                            <tbody align="center" valign="center">
+                            <tr>
+                              <td>Training data and participant instruction release for all shared tasks</td>
+                              <td>February 10, 2025</td>
+                            </tr>
+                            <tr>
+                              <td>Evaluation deadline for all shared tasks</td>
+                              <td>March 30, 2025</td>
+                            </tr>
+                            <tr>
+                                <td>Notification of all shared tasks</td>
+                                <td>April 5, 2025</td>
+                            </tr>
+                            <tr>
+                                <td>Shared-task paper submission deadline</td>
+                                <td>April 12, 2025</td>
+                            </tr>
+                            <tr>
+                                <td>Acceptance notification of shared-task papers</td>
+                                <td>April 30, 2025</td>
+                            </tr>
+                            <tr>
+                                <td>Camera ready paper deadline</td>
+                                <td>May 16, 2025</td>
+                            </tr>
+                            
+
+
+                            <!-- <tr>
+                                <td><b style="color: red">Challenge Paper Submission Deadline</b>(follow <a href="https://2024.acmmm.org/important-dates">MM2024 Workshop Dates</a>)</td>
+                                <td><b style="color: red">August 19, 2024</b></td>
+                            </tr> -->
+
+                        </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+            
+            <!-- / Paper video. -->
+            <div class="columns is-centered has-text-centered">
+                <div id="submission" class="column is-four-fifths">
+                    <h2 class="title is-3">Submission</h2>
+                    <div class="content has-text-justified">
+                        <p>
+                             Please sumbit predicted results with a json files "results.json".
+                        </p>
+                        
+                        <pre id="jsonShow">
+[
+{
+
+    "id": "test-0",
+    "domain": "DOMAIN_NAME",        # The domain of the text
+    "title": "TITLE",              # The title of the text
+
+
+    # Task 1: Named Entity Recognition
+    "entities": {
+        "ENTITY_ID_1": {
+            "mentions":["MENTION_1", "MENTION_2", ...],     # the mentions of the entity
+            "type": "ENTITY_TYPE_1"                         # the type of the entity
+        },
+        "ENTITY_ID_2": {
+            "mentions":["MENTION_1", "MENTION_2", ...],     # the mentions of the entity
+            "type": "ENTITY_TYPE_2"                         # the type of the entity
+        },
+        ...
+    },
+
+
+    # Task 2: Relation Extraction
+    "triplets": [
+        {
+            "subject": "SUBJECT_1",         # The subject of the relation triplet
+            "relation": "RELATION_1",       # The relation of the relation triplet
+            "object": "OBJECT_1"            # The object of the relation triplet
+
+        },
+        {
+            "subject": "SUBJECT_2",        # The subject of the relation triplet
+            "relation": "RELATION_2",      # The relation of the relation triplet
+            "object": "OBJECT_2"           # The object of the relation triplet
+        }
+    ],
+
+},
+
+{
+    "id": "test-1",
+       ...
+},
+...
+]
+</pre>
+                      
+<!--                         <p>
+                            Link to <a href="#">Codalab</a>
+                        </p> -->
+                        <p>
+                            
+                            Participants can submit at <a href="https://www.codabench.org/competitions/4897/">XXXX</a>.
+                        </p>
+                        <p>
+                            
+                            We will review the submissions publish the ranking here. 
+                            Feel free to contact us at <a href="mailto: XXXXXX@bigai.ai">XXXXXX@bigai.ai</a>.
+                            
+                        
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- / Paper video. -->
+            <div class="columns is-centered has-text-centered">
+                <div id="code" class="column is-four-fifths">
+                    <h2 class="title is-3">Baseline</h2>
+                    <div class="content has-text-justified">
+                      
+                        <p>
+                            Link to the code <a href="https://github.com/SpeechEE/SpeechEE">DocIE code</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+        
+             <!-- <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-3">Registration</h2>
+                    <div class="content has-text-justified">
+                        <p>
+                             Welcome and please apply for the VSD challenge via a form at <a href="https://docs.google.com/forms/d/e/1FAIpQLSfuKXhaN5qa61rWlwaE3VpJD5FHcVLH25Un95wch6fCKiXIGQ/viewform?usp=sf_link">this link</a>.
+                        </p>
+                        <p>
+                            Feel free to contact us at <a href="mailto: vsdchallenge@gmail.com">vsdchallenge@gmail.com</a>.
+                        </p>
+                    </div>
+                </div>
+            </div> -->
+
+            
+            
+            
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-3">Award of Top-ranking Participants</h2>
+                    <div class="content has-text-justified">
+                        <p>
+                            Top-ranked participants in this competition will receive a certificate of achievement and will be recommended to write a technical paper for submission to the <a>XLLM Workshop of ACL 2025</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>   
+
+            <!-- / Paper video. -->
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-3">Organizers</h2>
+                    <div class="content has-text-justified">
+                        
+            <p>Zixia Jia (Beijing Institute for General Artificial Intelligence, Beijing, China)</p>
+            <p>Shuyi Zhang (Beijing Institute for General Artificial Intelligence, Beijing, China)</p>
+            <p>Zhenbin Chen (Beijing Institute for General Artificial Intelligence, Beijing, China)</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-3">References</h2>
+                    <div class="content has-text-justified">
+                        <p>
+                            
+                            [1] Wang, B., Zhang, M., Fei, H., Zhao, Y., Li, B., Wu, S., ... & Zhang, M. (2024, October). SpeechEE: A Novel Benchmark for Speech Event Extraction. In Proceedings of the 32nd ACM International Conference on Multimedia (pp. 10449-10458).
+                        </p>
+
+                        <p>
+                            
+                            [2] Ying Lin, Heng Ji, Fei Huang, and Lingfei Wu. 2020. A Joint Neural Model for Information Extraction with Global Features. In Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics, pages 7999–8009, Online. Association for Computational Linguistics.
+                        </p>
+                     
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+</body>
+<script>
+    // function jsonShowFn(json){
+    //     if (!json.match("^\{(.+:.+,*){1,}\}$")) {
+    //         return json           //判断是否是json数据，不是直接返回
+    //     }
+
+    //     if (typeof json != 'string') {
+    //         json = JSON.stringify(json, undefined, 2);
+    //     }
+    //     json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    //     return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function(match) {
+    //         var cls = 'number';
+    //         if (/^"/.test(match)) {
+    //             if (/:$/.test(match)) {
+    //                 cls = 'key';
+    //             } else {
+    //                 cls = 'string';
+    //             }
+    //         } else if (/true|false/.test(match)) {
+    //             cls = 'boolean';
+    //         } else if (/null/.test(match)) {
+    //             cls = 'null';
+    //         }
+    //         return '<span class="' + cls + '">' + match + '</span>';
+    //     });
+    // }
+    // $('#jsonShow').html(jsonShowFn('[{"imd_id":1,"triple_list":["s":"book","o":"table"]}]'));
+</script>
+</html>
