@@ -213,11 +213,11 @@
                     <h2 class="title is-3">Challenge Task Definition and Metrtics</h2>
                     <div class="content has-text-justified">
                         <div style="text-align: center;">
-                            <img src="static/images/task1_new.pdf" width="90%" alt="">
+                            <img src="static/images/task1.pdf" width="90%" alt="">
                             <p><b>Task 1: Named Entity Recognition.</b></p>
                         </div>
                         <p>
-                            <b>Task-1:</b> Named Entity Recognition (NER) involves identifying named entities within a given text and classifying them into appropriate categories. Participants are expected to develop models that accurately extract both the entities and their corresponding types. Unlike traditional sentence-level NER tasks, this task requires participants to identify all mentions of each entity within the entire paragraph.
+                            <b>Task-1:</b> Named Entity Recognition (NER) involves identifying named entities within a given text and classifying them into appropriate categories. Participants are expected to develop models that accurately extract both the entities mand their corresponding types. Unlike traditional sentence-level NER tasks, this task requires participants to identify all mentions of each entity within the entire paragraph.
                         </p>
                         
                         <!-- <div style="text-align: center;">
@@ -260,32 +260,35 @@
 
                                     <h3> Named Entity Recognition</h3>
                                      <p>The named entity recognition task can be divided into Entity Identification and Entity Type Classification at a more fine-grained level. In order to evaluate the capabilities of the model more systematically, we set different evaluation indicators for these two aspects: </p>
-                                     <div style="text-align: center;">
-                                        <img src="static/images/metric.pdf" width="90%" alt="">
-                                        <p><b>The metric in different settings.</b></p>
-                                    </div>
+                                     <p><div style="text-align: center;">
+                                        <img src="static/images/NER.pdf" width="90%" alt="">
+                                        <p><b>Example of named entity recognition task. When an entity mention set is judged to be predicted correctly, the value of \(TP_{\text{EI}}\) or \(TP_{\text{EC}}\) increases by 1. Therefore, the final value of \(TP_{\text{EI}}\) or \(TP_{\text{EC}}\) represents the number of correctly extracted entity.</b>
+                                        </p>
+                                    </div></p>
                                      <h5>Entity Identification</h5>
-                                     <p>Unlike traditional NER task, participants not only require to extract the entity from the given text, but also require to correctly extract all its mentions to be considered to have correctly predicted the sample. </p>
-                                     <p>Therefores, the \(TP_{\text{EI}} \) indicates the number of samples that were correctly extract the entities and its mentions; <!--\(FP_{\text{EI}}\) indicates the number of samples that were incorrectly extract the entities or give the wrong mentions; \(FN_{\text{EI}}\) the model's prediction result are inconsistent with Ground True.--> Finally, according to the calculation formula of F1 score, \(F1_{EI}\) can be calculated as the evaluation metric of this subtask.</p>
+                                     <p>Participants are required to correctly extract all the entity mentions from the given text. Only all predicted mentions match the ground truth, the sample will be considered correctly predicted. And the value of \(TP_{\text{EI}} \)  is the number of samples predicted correctly. Finally, according to the calculation formula of F1 score, \(F1_{EI}\) can be calculated as the evaluation metric of this subtask.</p>
+                                     
 
                                      <h5>Entity Classification</h5>
-                                    <p>In traditional NER tasks, the model not only requires to correctly extract entities from text, but also requires to classify the types of entities. Unlike traditional setting, participants not only requrie to classify the type of the entities, but also its mentions. </p>
                                     <p>
-                                        Therefores, the \(TP_{\text{EC}} \) indicates the number of samples that were correctly classify the entities and its mentions to their corresponding types; <!--\(FP_{\text{EC}}\) indicates the number of samples that were incorrectly extract the entities or give the wrong mentions; \(FN_{\text{EC}}\) the model's prediction result are inconsistent with Ground True.--> Finally, according to the calculation formula of F1 score, \(F1_{EC}\) can be calculated as the evaluation metric of this subtask.
+                                        Participants are required to classify all predicted mentions into the correct entity types. Only all mentions are classify correctly, the sample will be considered correctly predicted. And the value of \(TP_{\text{EC}} \)  is the number of samples classify correctly. Finally, according to the calculation formula of F1 score, \(F1_{EC}\) can be calculated as the evaluation metric of this subtask.</p>
+
                                     </p>
+
                                     
 
                                     <h3> Relation Extraction</h3>
                                         <p>The evaluation of the relation extraction will be divided into two different settings: general mode and strict mode.</p>
                                         <div style="text-align: center;">
-                                            <img src="static/images/metric.pdf" width="90%" alt="">
-                                            <p><b>The metric in different settings.</b></p>
+                                            <img src="static/images/RE.pdf" width="90%" alt="">
+                                            <p><b>Example of relation extraction task in general mode and strict mode. When a triple is judged to be predicted correctly, the value of \(TP_{\text{REG}}\) increases by 1. Therefore, the final value of \(TP_{\text{REG}}\) represents the number of correctly predicted triplets.</b></p>
                                         </div>
 
 
                                         <ul>
-                                            <li> <b>General Mode</b>: Participants require to accurately extract all entities and its relation in a given text, i.e. accurately predict the relation triplets (head entity, relation, tail entity). If the head entity and tail entity are replaced by their mentions, we still consider the sample was predicted correctly. Based on the above discrimination criteria and the basic metric, we can further calculate the F1 score \(F1_{RE\_gen}\) in general mode.</li>
-                                            <li> <b>Strict Mode</b>: Participants require to accurately extract all entities and its relation. In this setting, we strictly compare the difference between the ground true and the predicted results. Therefore, when the model uses the entity mentions to replace the entity, the relation triplet will be considered as a prediction error. Based on the above discrimination criteria and the basic metric, we can further calculate the F1 score \(F1_{RE\_sti}\) in strict mode.</li>
+                                            <li> <b>General Mode</b>: Participants require to accurately extract all entity mentions and their relations in a given text, i.e. accurately predict the relation triplets (head entity mention, relation, tail entity mention). If the head entity mention and tail entity mention are replaced by another mention in the same mention set, we still consider the sample was predicted correctly. \(TP_{\text{REG}}\) is the number of triples predicted correctly in general mode. And based on the above discrimination criteria and the basic metric, \(F1_{REG}\) can be calculated as the evaluation metric of this subtask.</li>
+
+                                            <li> <b>Strict Mode</b>: Participants require to accurately extract all entities mentions and their relations. In this setting, we strictly compare the difference between the ground true and the predicted results. Therefore, if the head entity mention and tail entity mention are replaced by another mention in the same mention set, we will consider the sample was <b>not</b> predicted correctly. \(TP_{\text{RES}}\) is the number of triples predicted correctly in strict mode. And based on the above discrimination criteria and the basic metric, \(F1_{RES}\) can be calculated as the evaluation metric of this subtask</li>
                                         </ul>
                                         
 
@@ -304,12 +307,14 @@
                 <div id="dataset" class="column is-four-fifths">
                     <h2 class="title is-3">Dataset</h2>
                     <div class="content has-text-justified">
+
+                        <p>
+                            The distribution of domains and source datasets within the DocIE, including XX domains and XX source datasets, is shown in the figure above. The DocIE is a comprehensive dataset that covers a wide range of domains and source datasets, making it a valuable resource for researchers and practitioners in the field of Document-level information extraction.
+
                         <div style="text-align: center;">
                             <img src="static/images/statistic.png" width="90%" alt="">
                             <p><b>Distribution of different tasks, domains, and source datasets within the DocIE.</b></p>
                         </div>
-                        <p>
-                            The distribution of domains and source datasets within the DocIE, including XX domains and XX source datasets, is shown in the figure above. The DocIE is a comprehensive dataset that covers a wide range of domains and source datasets, making it a valuable resource for researchers and practitioners in the field of Document-level information extraction.
                         </p>
 
 
