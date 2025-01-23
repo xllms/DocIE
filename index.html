@@ -36,6 +36,7 @@
     <script defer src="./static/js/fontawesome.all.min.js"></script>
     <script src="./static/js/bulma-carousel.min.js"></script>
     <script src="./static/js/bulma-slider.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <!--  <script src="./static/js/index.js"></script>-->
     <style>
         pre {outline: 1px solid #ccc; }
@@ -233,8 +234,7 @@
                             <p><b>Task 2:  Relation Extraction.</b></p>
                         </div>
                         <p>
-                            <b>Task-2:</b> Relation Extraction (RE) aims to identify the relation between two entities in the given paragraph. Participants are required to develop models that can accurately identify the relation between two extracted entities. A relation is considered correctly identified if it matches the gold standard relation. The evaluation metric for this sub-task is the F1 score. <b>Unlike traditional sentence-level RE task, the entities in a relation triple may across multiple sentences, and the relations between entities may also be inferred from the context include multiple sentences.</b>
-
+                            <b>Task-2:</b> Relation Extraction(RE) involves identifying the relations between entities within a given text. Participants are expected to develop models that accurately extract both entitiy pairs and its relaion types. Unlike traditional sentence-level RE tasks, this task requires participants to identify all relations of each entity pair within the entire paragraph.
                         </p>
 
 
@@ -243,49 +243,53 @@
                             <div>
                                 <h2 class="title is-3">Evaluation</h2>
                                 <div class="content has-text-justified">
+                                    <h3> Basic Metric</h3>
+                                    The F1 score is an important evaluation metric for information extraction tasks, which is calculated by Precision \(P\)  and Recall \(R\):
+                                         <p>$$ P = \frac{TP}{ TP + FP } $$ </p>
+                                         <p>$$ R = \frac{TP}{TP + FN} $$ </p>
+                                         <p>$$ F1 = \frac{2 \times P \times R }{ P + R } $$ </p>
+                                         <ul>
+                                             <li>\(TP\): True Positive ratio, which indicates the number of samples that were correctly predicted by the model.</li>
+                                             <li>\(FP\): False Positive ratio, which indicates the number of samples that were incorrectly predicted by the model.</li>
+                                             <li>\(FN\): False Negative ratio, which the number of samples that the model's prediction are inconsistent with Ground True .</li>
+                                         </ul>
+                                         <p>We will use the F1 score as the main evaluation metric. However, for different settings (strict mode and general mode), there are different criteria for determining whether a sample is correctly predicted, which we will introduce in detail.
+                                        </p>
+                                         
+                                        <!--我们将使用F1分数作为主要的评估指标。然而，对于不同的设置（严格模式和一般模式）下，判断一个样本是否被正确预测存在不同的判定标准，我们将进行详细地介绍： -->
+
+                                    <h3> Named Entity Recognition</h3>
+                                     <p>The named entity recognition task can be divided into Entity Identification and Entity Type Classification at a more fine-grained level. In order to evaluate the capabilities of the model more systematically, we set different evaluation indicators for these two aspects: </p>
+                                     <div style="text-align: center;">
+                                        <img src="static/images/metric.pdf" width="90%" alt="">
+                                        <p><b>The metric in different settings.</b></p>
+                                    </div>
+                                     <h5>Entity Identification</h5>
+                                     <p>Unlike traditional NER task, participants not only require to extract the entity from the given text, but also require to correctly extract all its mentions to be considered to have correctly predicted the sample. </p>
+                                     <p>Therefores, the \(TP_{\text{EI}} \) indicates the number of samples that were correctly extract the entities and its mentions; <!--\(FP_{\text{EI}}\) indicates the number of samples that were incorrectly extract the entities or give the wrong mentions; \(FN_{\text{EI}}\) the model's prediction result are inconsistent with Ground True.--> Finally, according to the calculation formula of F1 score, \(F1_{EI}\) can be calculated as the evaluation metric of this subtask.</p>
+
+                                     <h5>Entity Classification</h5>
+                                    <p>In traditional NER tasks, the model not only requires to correctly extract entities from text, but also requires to classify the types of entities. Unlike traditional setting, participants not only requrie to classify the type of the entities, but also its mentions. </p>
                                     <p>
-                          
-                                        The F1 score is computed using precision (P) and recall (R), which are calculated as follows:
-                                         <p>
-                                          <b><em>P = TP / ( TP + FP )</em></b>
-                                         </p>
-                                         <p>
-                                          <b><em>R = TP / ( TP + FN ) </em></b>
-                                         </p>
-                                         <p>
-                                          <b><em>F1 = 2 * P * R / ( P + R ) </em></b>
-                                         </p>
-                                       
-                                         where TP, FP, and FN represent specific items that are used to calculate the F1 score in the context of a Confusion_matrix.
-                                         In particular, when computing the micro-F1 score, TP corresponds to the number of predicted tuple that match exactly with those in the gold set. 
-                                         <div style="text-align: center;">
+                                        Therefores, the \(TP_{\text{EC}} \) indicates the number of samples that were correctly classify the entities and its mentions to their corresponding types; <!--\(FP_{\text{EC}}\) indicates the number of samples that were incorrectly extract the entities or give the wrong mentions; \(FN_{\text{EC}}\) the model's prediction result are inconsistent with Ground True.--> Finally, according to the calculation formula of F1 score, \(F1_{EC}\) can be calculated as the evaluation metric of this subtask.
+                                    </p>
+                                    
+
+                                    <h3> Relation Extraction</h3>
+                                        <p>The evaluation of the relation extraction will be divided into two different settings: general mode and strict mode.</p>
+                                        <div style="text-align: center;">
                                             <img src="static/images/metric.pdf" width="90%" alt="">
                                             <p><b>The metric in different settings.</b></p>
                                         </div>
-                                        It is worth noting that our evaluation metrics consider <b>two different settings</b>. 
 
-                                        <p>
-                                        In the <b>common setting</b>, the NER task only needs to extract the corresponding entity and determine its type; the head and tail entities predicted by the RE task can be replaced by their mentions. 
-                                        </p>
-                                        <p>
-                                        In the <b>strict setting</b>, the NER task should give all the descriptions of the entity in the paragraph; the prediction results of the RE task should be strictly consistent with the Ground True.
-                                        </p>
-              
-                                         
-                                      </p>
-                                      <p>
-                                          Finally, we use the following score for ranking:
-                                      </p>
-                                      <p>
-                                               <b>Score<sub>common</sub>=<em>0.5*Task<sub>1_common</sub>+0.5*Task<sub>2_common</sub></em></b>
-                                      </p>
-                                      <p>
-                                        <b>Score<sub>strict</sub>=<em>0.5*Task<sub>1_strict</sub>+0.5*Task<sub>2_strict</sub></em></b>
-                                    </p>
-                                    <p>
-                                        <b>overall_score=<em>0.5* Score<sub>common</sub> +0.5* Score<sub>strict</sub></em></b>
-                                    </p>
-                                          We provide python scripts for evaluation, please refer to the <a href="#">XXXXXXX codes</a> "/challenge/XXXXX.py". <!--Add Link Here-->
+
+                                        <ul>
+                                            <li> <b>General Mode</b>: Participants require to accurately extract all entities and its relation in a given text, i.e. accurately predict the relation triplets (head entity, relation, tail entity). If the head entity and tail entity are replaced by their mentions, we still consider the sample was predicted correctly. Based on the above discrimination criteria and the basic metric, we can further calculate the F1 score \(F1_{RE\_gen}\) in general mode.</li>
+                                            <li> <b>Strict Mode</b>: Participants require to accurately extract all entities and its relation. In this setting, we strictly compare the difference between the ground true and the predicted results. Therefore, when the model uses the entity mentions to replace the entity, the relation triplet will be considered as a prediction error. Based on the above discrimination criteria and the basic metric, we can further calculate the F1 score \(F1_{RE\_sti}\) in strict mode.</li>
+                                        </ul>
+                                        
+
+   
                        
                                 </div>
                             </div>
@@ -305,12 +309,10 @@
                             <p><b>Distribution of different tasks, domains, and source datasets within the DocIE.</b></p>
                         </div>
                         <p>
-                            The distribution of domains and source datasets within the DocIE, including XX domains and XX source datasets, is shown in the figure above. The DocIE is a comprehensive dataset that covers a wide range of domains and source datasets, making it a valuable resource for researchers and practitioners in the field of relation extraction.
+                            The distribution of domains and source datasets within the DocIE, including XX domains and XX source datasets, is shown in the figure above. The DocIE is a comprehensive dataset that covers a wide range of domains and source datasets, making it a valuable resource for researchers and practitioners in the field of Document-level information extraction.
                         </p>
 
-                        <p>
-                            The dataset for this challenge is derived from WikiPedia. This dataset contains XXX,XXX entities and XXX,XXX relations, with XXX,XXX paragraphs for training your model. The detailed information is recorded in the <a href="#baseline">baseline codes</a> "/challenge/event-schema.json".
-                        </p>
+
                         <p>
                             Example of a sample:
                         </p>
@@ -360,7 +362,7 @@
 </pre>
                         <p>
                             <!--Add Link Here-->
-                            The datasets are avaliable on <a href="#">Google Drive</a> and the label json files are in the <a href="#baseline">baseline codes</a> "/challenge/data/ACE05EN".
+                            The datasets are avaliable on <a href="https://drive.google.com/drive/folders/1ll2feQBdds2uOdoaQ-j4f4HIE63cOdUi?usp=drive_link">Google Drive</a>.
                         </p>
                     </div>
                 </div>
@@ -481,18 +483,7 @@
 <!--                         <p>
                             Link to <a href="#">Codalab</a>
                         </p> -->
-                        <p>
-                            <!--Add Link Here-->
-                            Participants can submit at <a href="#">XXXX</a>.
-                        </p>
-                        <p>
-                            
-                            We will review the submissions publish the ranking here. 
-                            <!--Add Link Here-->
-                            Feel free to contact us at <a href="mailto: XXXXXX@bigai.ai">XXXXXX@bigai.ai</a>.
-                            
-                        
-                        </p>
+                       
                     </div>
                 </div>
             </div>
@@ -505,7 +496,7 @@
                       
                         <p>
                             <!--Add Link Here-->
-                            Link to the code <a href="#">DocIE code</a>
+                            Baseline code and full data will publish as soon as possible.
                         </p>
                     </div>
                 </div>
@@ -547,6 +538,7 @@
                     <div class="content has-text-justified">
                         
             <p>Zixia Jia (Beijing Institute for General Artificial Intelligence, Beijing, China)</p>
+            <p>Zilong Zheng (Beijing Institute for General Artificial Intelligence, Beijing, China)</p>
             <p>Shuyi Zhang (Beijing Institute for General Artificial Intelligence, Beijing, China)</p>
             <p>Zhenbin Chen (Beijing Institute for General Artificial Intelligence, Beijing, China)</p>
                     </div>
@@ -560,14 +552,23 @@
                     <div class="content has-text-justified">
                         <p>
                             
-                            [1] -
+                            [1] Yao, Yuan, et al. "DocRED: A large-scale document-level relation extraction dataset." arXiv preprint arXiv:1906.06127 (2019).
                         </p>
 
                         <p>
                             
-                            [2] -
+                            [2] Tan, Qingyu, et al. "Revisiting DocRED--Addressing the False Negative Problem in Relation Extraction." arXiv preprint arXiv:2205.12696 (2022).
                         </p>
-                     
+
+                        <p>
+                            [3] Li, Junpeng, Zixia Jia, and Zilong Zheng. "Semi-automatic data enhancement for document-level relation extraction with distant supervision from large language models." arXiv preprint arXiv:2311.07314 (2023).
+                        </p>
+                        <p>
+                            [4] Gui, Honghao, et al. "Iepile: Unearthing large-scale schema-based information extraction corpus." arXiv preprint arXiv:2402.14710 (2024).
+                        </p>
+                        <p>
+                            [5] Xue, Lilong, et al. "Autore: Document-level relation extraction with large language models." arXiv preprint arXiv:2403.14888 (2024).
+                        </p>
                     </div>
                 </div>
             </div>
