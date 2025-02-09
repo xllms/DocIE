@@ -338,8 +338,9 @@
         },
         ... ...
     ],
-    "entities": {
-        "088f003833d523d9dccc529e929afdc7": {
+    "entities":[ 
+        {
+            "id": 0,
             "mentions": [
                 "the United States",
                 "America",
@@ -353,7 +354,8 @@
             ],
             "type": "GPE"
         },
-        "ab350764d8b507100f7cbb1ee09bf7e7": {
+        {
+            "id": 1,
             "mentions": [
                 "Yale Law School",
                 "Yale"
@@ -361,7 +363,7 @@
             "type": "ORG"
         },
         ... ...
-    },
+    ],
     "label_set": ["ReviewedBy","NominatedFor","InfluencedBy","AwardReceived","HasWorksInTheCollection","Creator","PresentedIn","EthnicGroup","PublishedIn","Affiliation","OwnerOf","InvestigatedBy","CitesWork","HasPart","Acknowledged","DifferentFrom","Follows"],
     "entity_label_set":['CARDINAL', 'DATE', 'EVENT', 'FAC', 'GPE', 'LANGUAGE', 'LAW', 'LOC', 'MONEY', 'NORP', 'ORDINAL', 'ORG', 'PERCENT', 'PERSON', 'PRODUCT', 'QUANTITY', 'TIME', 'WORK_OF_ART']
 }
@@ -434,6 +436,21 @@
                 <div id="submission" class="column is-four-fifths">
                     <h2 class="title is-3">Submission</h2>
                     <div class="content has-text-justified">
+                        <p>
+                            Our challenge aims to explore the domain transfer ability of LLM in document-level information extraction (DocIE) tasks in low-resource scenarios. Therefore, the dataset we provide contains document data from 34 different domains. Among them, we divide the datasets of 5 domains into training sets, the datasets of 2 domains into validation sets, and the datasets of the remaining multiple domains as test sets. The data of each domain contains 8-10 documents.
+                        </p>
+                        <p>
+                            Participants can use the training set we provide to train their own information extraction model and make predictions on the test set data we provide. <b>It is worth noting that we allow participants to use additional data for training.</b> Participants need to use the trained model to make predictions on the test set we provide, and organize the test results into the following format.
+                        </p>
+                        <p>
+                            Participants need to successfully submit all the following files to be considered valid submissions:
+                            <ol>
+                                <li><b>Prediction result file (result.json)</b>: Participants need to record the prediction results of the model on the test set in this file in the specified format.</li>
+                                <li><b>Model weight file (*.ckpt, *.bin)</b>: Participants need to provide the trained model weight file.</li>
+                                <li><b>Executable script file (*.py)</b>: Participants need to provide an executable script file, which we will use with the model weights provided by the participants to verify the authenticity of the results provided by the participants.</li>
+                            </ol>
+                            All the above files need to be submitted through CodaBench, and CodaBench will be used to evaluate the prediction results submitted by the participants in real time.
+                        </p>
                         <p>
                              Please sumbit predicted results with a json files "results.json".
                         </p>
@@ -533,7 +550,7 @@
                     <h2 class="title is-3">Award of Top-ranking Participants</h2>
                     <div class="content has-text-justified">
                         <p>
-                            Top-ranked participants in this competition will receive a certificate of achievement and will be recommended to write a technical paper for submission to the <a>XLLM Workshop of ACL 2025</a>.
+                            Top-ranked participants in this competition will receive a certificate of achievement and will be recommended to write a technical paper for submission to the <a href="https://xllms.github.io">XLLM Workshop of ACL 2025</a>.
                         </p>
                     </div>
                 </div>
