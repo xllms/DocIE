@@ -461,11 +461,8 @@
 [
 {
 
-    "id": "test-0",
+    "id": 0,
     "domain": "DOMAIN_NAME",       # The domain of the text
-    "title": "TITLE",              # The title of the text
-    "entities": [...]              # Ground True
-    "triplets": [...]              # Ground True
 
     # Participants need to form the prediction results into the following structure
     # Task 1: Named Entity Recognition
@@ -483,24 +480,24 @@
 
 
     # Task 2: Relation Extraction
-    "triplets_output": [
+    "triples_output": [
         {
-            "subject": "SUBJECT_1",         # The subject of the relation triplet
+            "head": "SUBJECT_1",         # The subject of the relation triplet
             "relation": "RELATION_1",       # The relation of the relation triplet
-            "object": "OBJECT_1"            # The object of the relation triplet
+            "tail": "OBJECT_1"            # The object of the relation triplet
 
         },
         {
-            "subject": "SUBJECT_2",        # The subject of the relation triplet
+            "head": "SUBJECT_2",        # The subject of the relation triplet
             "relation": "RELATION_2",      # The relation of the relation triplet
-            "object": "OBJECT_2"           # The object of the relation triplet
+            "tail": "OBJECT_2"           # The object of the relation triplet
         }
     ],
 
 },
 
 {
-    "id": "test-1",
+    "id": 1,
        ...
 },
 ...
