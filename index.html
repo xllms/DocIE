@@ -437,19 +437,21 @@
                     <h2 class="title is-3">Submission</h2>
                     <div class="content has-text-justified">
                         <p>
-                            Our challenge aims to explore the domain transfer ability of LLM in document-level information extraction (DocIE) tasks in low-resource scenarios. Therefore, the dataset we provide contains document data from 34 different domains. Among them, we divide the datasets of 5 domains into training sets, the datasets of 2 domains into validation sets, and the datasets of the remaining multiple domains as test sets. The data of each domain contains 8-10 documents.
+                            <!-- Our challenge aims to explore the domain transfer ability of LLM in document-level information extraction (DocIE) tasks in low-resource scenarios. Therefore, the dataset we provide contains document data from 34 different domains. Among them, we divide the datasets of 5 domains into training sets, the datasets of 2 domains into validation sets, and the datasets of the remaining multiple domains as test sets. The data of each domain contains 8-10 documents. -->
+                            Our challenge seeks to investigate the domain transfer capabilities of large language models (LLMs) in document-level information extraction (DocIE) tasks, particularly in low-resource settings. To this end, we present a dataset that encompasses document data from 34 distinct domains. The dataset is divided as follows: 5 domains are designated for training, 2 domains for validation, and the remaining domains are allocated as test sets. Each domain dataset consists of 8 to 10 documents.
                         </p>
                         <p>
-                            Participants can use the training set we provide to train their own information extraction model and make predictions on the test set data we provide. <b>It is worth noting that we allow participants to use additional data for training.</b> Participants need to use the trained model to make predictions on the test set we provide, and organize the test results into the following format.
+                            <!-- Participants can use the training set we provide to train their own information extraction model and make predictions on the test set data we provide. <b>It is worth noting that we allow participants to use additional data for training.</b> Participants need to use the trained model to make predictions on the test set we provide, and organize the test results into the following format. -->
+                            Participants may utilize the provided training set to develop their own information extraction models and make predictions on the test set. It is important to note that <b>the use of additional data for training is permitted.</b> Participants are required to apply their trained models to generate predictions on the test set and present the results in the specified format.
                         </p>
                         <p>
                             Participants need to successfully submit all the following files to be considered valid submissions:
                             <ol>
-                                <li><b>Prediction result file (result.json)</b>: Participants need to record the prediction results of the model on the test set in this file in the specified format.</li>
+                                <li><b>Prediction result file (result.json)</b>: This file should contain the prediction results of the model on the test set, formatted according to the specified requirements.</li>
                                 <li><b>Model weight file (*.ckpt, *.bin)</b>: Participants need to provide the trained model weight file.</li>
-                                <li><b>Executable script file (*.py)</b>: Participants need to provide an executable script file, which we will use with the model weights provided by the participants to verify the authenticity of the results provided by the participants.</li>
+                                <li><b>Executable script file (*.py)</b>: An executable script file must be provided, which will be used in conjunction with the submitted model weights to verify the correctness of the provided results.</li>
                             </ol>
-                            All the above files need to be submitted through CodaBench, and CodaBench will be used to evaluate the prediction results submitted by the participants in real time.
+                            All required files must be submitted via CodaBench, which will be used to evaluate the submitted prediction results in real time.
                         </p>
                         <p>
                              Please sumbit predicted results with a json files "results.json".
