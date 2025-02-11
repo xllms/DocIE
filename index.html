@@ -197,15 +197,84 @@
                         <p>
                         We introduce the Document-level Information Extraction (DocIE) challenge on this platform. The goal of DocIE is to identify entities, their corresponding mentions, and the relationships between entity pairs within long, unstructured documents. This challenge requires models to process an input document, which consists of a sequence of sentences, and produce output structures that include three key elements: 1) sets of mentions, where each set corresponds to a distinct entity; 2) entity types; and 3) relation triples, which describe the relationships between pairs of entities.
                         </p>
-
-                        
-                        <p>
-                            The challenge contains three subtasks as following:
-                        </p>
                     </div>
                 </div>
             </div>
             <!--/ Abstract. -->
+             <!-- Datasets. -->
+             <div class="columns is-centered has-text-centered">
+                <div id="dataset" class="column is-four-fifths">
+                    <h2 class="title is-3">Dataset</h2>
+                    <div class="content has-text-justified">
+
+                        <p>
+                            The distribution of domains and source datasets within the DocIE, including 34 domains datasets, is shown in the figure above. The DocIE is a comprehensive dataset that covers a wide range of domains and source datasets, making it a valuable resource for researchers and practitioners in the field of Document-level information extraction.
+
+                        <div style="text-align: center;">
+                            <img src="static/images/statistic.png" width="90%" alt="">
+                            <p><b>Distribution of different tasks, domains, and source datasets within the DocIE.</b></p>
+                        </div>
+                        </p>
+
+
+                        <p>
+                            Example of a sample:
+                        </p>
+                        <pre id="jsonShow">
+{
+    "domain": "Culture",
+    "title": "The_Triple_Package",
+    "doc": "The Triple Package: How Three Unlikely Traits Explain the Rise and Fall of Cultural Groups in America is a book published in 2014 by two professors at Yale Law School, Amy Chua and her husband, Jed Rubenfeld. Amy Chua is also the author of the 2011 international bestseller, Battle Hymn of the Tiger Mother.\nAccording to the preface, the authors find that \"certain groups do much better in America than others\u2014as measured by various socioeconomic indicators such as income, occupational status, job prestige, test scores, and so on\u2014 [which] is difficult to talk about. In large part this is because the topic feels racially charged.\" Nevertheless, the book attempts to debunk racial stereotypes by focusing on three \"cultural traits\" that attribute to success in the United States.\nFollowing Battle Hymn of the Tiger Mother in 2011, Chua wrote this book with her husband Jed Rubenfeld after observing a more prevalent trend of students from specific ethnic groups achieving better academic results than other ethnic groups. For example, ..........",
+    "triplets": [
+        {
+            "subject": "The Triple Package",
+            "relation": "ReviewedBy",
+            "object": "Colin Woodard"
+        },
+        {
+            "subject": "The Triple Package",
+            "relation": "Creator",
+            "object": "Jed Rubenfeld"
+        },
+        ... ...
+    ],
+    "entities":[ 
+        {
+            "id": 0,
+            "mentions": [
+                "the United States",
+                "America",
+                "U.S.",
+                "American",
+                "the successful groups in the United States",
+                "the rest in America",
+                "the national average",
+                "the American dream",
+                "UK"
+            ],
+            "type": "GPE"
+        },
+        {
+            "id": 1,
+            "mentions": [
+                "Yale Law School",
+                "Yale"
+            ],
+            "type": "ORG"
+        },
+        ... ...
+    ],
+    "label_set": ["ReviewedBy","NominatedFor","InfluencedBy","AwardReceived","HasWorksInTheCollection","Creator","PresentedIn","EthnicGroup","PublishedIn","Affiliation","OwnerOf","InvestigatedBy","CitesWork","HasPart","Acknowledged","DifferentFrom","Follows"],
+    "entity_label_set":['CARDINAL', 'DATE', 'EVENT', 'FAC', 'GPE', 'LANGUAGE', 'LAW', 'LOC', 'MONEY', 'NORP', 'ORDINAL', 'ORG', 'PERCENT', 'PERSON', 'PRODUCT', 'QUANTITY', 'TIME', 'WORK_OF_ART']
+}
+</pre>
+                        <p>
+                            <!--Add Link Here-->
+                            The datasets are avaliable on <a href="https://drive.google.com/drive/folders/1ll2feQBdds2uOdoaQ-j4f4HIE63cOdUi?usp=drive_link">Google Drive</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
 
             <!-- Paper video. -->
             <div id="task" div class="columns is-centered has-text-centered">
@@ -290,144 +359,31 @@
 
                                             <li> <b>Strict Mode</b>: Participants require to accurately extract all entities mentions and their relations. In this setting, we strictly compare the difference between the ground true and the predicted results. Therefore, if the head entity mention and tail entity mention are replaced by another mention in the same mention set, we will consider the sample was <b>not</b> predicted correctly. \(TP_{\text{RES}}\) is the number of triples predicted correctly in strict mode. And based on the above discrimination criteria and the basic metric, \(F1_{RES}\) can be calculated as the evaluation metric of this subtask</li>
                                         </ul>
-                                        
-
-   
-                       
                                 </div>
                             </div>
                         </div>
-
-                        
                     </div>
                 </div>
             </div>
-             <!-- Datasets. -->
+            
+
+
+
+ 
+
+            <!-- / Paper video. -->
             <div class="columns is-centered has-text-centered">
-                <div id="dataset" class="column is-four-fifths">
-                    <h2 class="title is-3">Dataset</h2>
+                <div id="code" class="column is-four-fifths">
+                    <h2 class="title is-3">Baseline</h2>
                     <div class="content has-text-justified">
-
-                        <p>
-                            The distribution of domains and source datasets within the DocIE, including 34 domains datasets, is shown in the figure above. The DocIE is a comprehensive dataset that covers a wide range of domains and source datasets, making it a valuable resource for researchers and practitioners in the field of Document-level information extraction.
-
-                        <div style="text-align: center;">
-                            <img src="static/images/statistic.png" width="90%" alt="">
-                            <p><b>Distribution of different tasks, domains, and source datasets within the DocIE.</b></p>
-                        </div>
-                        </p>
-
-
-                        <p>
-                            Example of a sample:
-                        </p>
-                        <pre id="jsonShow">
-{
-    "domain": "Culture",
-    "title": "The_Triple_Package",
-    "doc": "The Triple Package: How Three Unlikely Traits Explain the Rise and Fall of Cultural Groups in America is a book published in 2014 by two professors at Yale Law School, Amy Chua and her husband, Jed Rubenfeld. Amy Chua is also the author of the 2011 international bestseller, Battle Hymn of the Tiger Mother.\nAccording to the preface, the authors find that \"certain groups do much better in America than others\u2014as measured by various socioeconomic indicators such as income, occupational status, job prestige, test scores, and so on\u2014 [which] is difficult to talk about. In large part this is because the topic feels racially charged.\" Nevertheless, the book attempts to debunk racial stereotypes by focusing on three \"cultural traits\" that attribute to success in the United States.\nFollowing Battle Hymn of the Tiger Mother in 2011, Chua wrote this book with her husband Jed Rubenfeld after observing a more prevalent trend of students from specific ethnic groups achieving better academic results than other ethnic groups. For example, ..........",
-    "triplets": [
-        {
-            "subject": "The Triple Package",
-            "relation": "ReviewedBy",
-            "object": "Colin Woodard"
-        },
-        {
-            "subject": "The Triple Package",
-            "relation": "Creator",
-            "object": "Jed Rubenfeld"
-        },
-        ... ...
-    ],
-    "entities":[ 
-        {
-            "id": 0,
-            "mentions": [
-                "the United States",
-                "America",
-                "U.S.",
-                "American",
-                "the successful groups in the United States",
-                "the rest in America",
-                "the national average",
-                "the American dream",
-                "UK"
-            ],
-            "type": "GPE"
-        },
-        {
-            "id": 1,
-            "mentions": [
-                "Yale Law School",
-                "Yale"
-            ],
-            "type": "ORG"
-        },
-        ... ...
-    ],
-    "label_set": ["ReviewedBy","NominatedFor","InfluencedBy","AwardReceived","HasWorksInTheCollection","Creator","PresentedIn","EthnicGroup","PublishedIn","Affiliation","OwnerOf","InvestigatedBy","CitesWork","HasPart","Acknowledged","DifferentFrom","Follows"],
-    "entity_label_set":['CARDINAL', 'DATE', 'EVENT', 'FAC', 'GPE', 'LANGUAGE', 'LAW', 'LOC', 'MONEY', 'NORP', 'ORDINAL', 'ORG', 'PERCENT', 'PERSON', 'PRODUCT', 'QUANTITY', 'TIME', 'WORK_OF_ART']
-}
-</pre>
+                      
                         <p>
                             <!--Add Link Here-->
-                            The datasets are avaliable on <a href="https://drive.google.com/drive/folders/1ll2feQBdds2uOdoaQ-j4f4HIE63cOdUi?usp=drive_link">Google Drive</a>.
+                            Baseline code and full data will publish as soon as possible.
                         </p>
                     </div>
                 </div>
             </div>
-
-
-
-            <div class="columns is-centered has-text-centered">
-                <div id="timeline" class="column is-four-fifths">
-                    <h2 class="title is-3">Timeline</h2>
-                    <div class="content has-text-justified">
-                        <p>
-                            Please note: The submission deadline is at 11:59 p.m. (<a herf="https://www.timeanddate.com/time/zones/aoe" style="color:red">Anywhere on Earth</a>) of the stated deadline date.
-                        </p>
-                        <table class="._table table-bordered table-striped" align="center">
-                            <tbody align="center" valign="center">
-                            <tr>
-                              <td>Training data and participant instruction release for all shared tasks</td>
-                              <td>February 10, 2025</td>
-                            </tr>
-                            <tr>
-                              <td>Evaluation deadline for all shared tasks</td>
-                              <td>March 30, 2025</td>
-                            </tr>
-                            <tr>
-                                <td>Notification of all shared tasks</td>
-                                <td>April 5, 2025</td>
-                            </tr>
-                            <tr>
-                                <td>Shared-task paper submission deadline</td>
-                                <td>April 12, 2025</td>
-                            </tr>
-                            <tr>
-                                <td>Acceptance notification of shared-task papers</td>
-                                <td>April 30, 2025</td>
-                            </tr>
-                            <tr>
-                                <td>Camera ready paper deadline</td>
-                                <td>May 16, 2025</td>
-                            </tr>
-                            
-
-
-                            <!-- <tr>
-                                <td><b style="color: red">Challenge Paper Submission Deadline</b>(follow <a href="https://2024.acmmm.org/important-dates">MM2024 Workshop Dates</a>)</td>
-                                <td><b style="color: red">August 19, 2024</b></td>
-                            </tr> -->
-
-                        </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-
-
 
 
 
@@ -513,19 +469,7 @@
                 </div>
             </div>
 
-            <!-- / Paper video. -->
-            <div class="columns is-centered has-text-centered">
-                <div id="code" class="column is-four-fifths">
-                    <h2 class="title is-3">Baseline</h2>
-                    <div class="content has-text-justified">
-                      
-                        <p>
-                            <!--Add Link Here-->
-                            Baseline code and full data will publish as soon as possible.
-                        </p>
-                    </div>
-                </div>
-            </div>
+
             
         
              <!-- <div class="columns is-centered has-text-centered">
@@ -542,7 +486,53 @@
                 </div>
             </div> -->
 
-            
+            <div class="columns is-centered has-text-centered">
+                <div id="timeline" class="column is-four-fifths">
+                    <h2 class="title is-3">Timeline</h2>
+                    <div class="content has-text-justified">
+                        <p>
+                            Please note: The submission deadline is at 11:59 p.m. (<a herf="https://www.timeanddate.com/time/zones/aoe" style="color:red">Anywhere on Earth</a>) of the stated deadline date.
+                        </p>
+                        <table class="._table table-bordered table-striped" align="center">
+                            <tbody align="center" valign="center">
+                            <tr>
+                              <td>Training data and participant instruction release for all shared tasks</td>
+                              <td>February 10, 2025</td>
+                            </tr>
+                            <tr>
+                              <td>Evaluation deadline for all shared tasks</td>
+                              <td>March 30, 2025</td>
+                            </tr>
+                            <tr>
+                                <td>Notification of all shared tasks</td>
+                                <td>April 5, 2025</td>
+                            </tr>
+                            <tr>
+                                <td>Shared-task paper submission deadline</td>
+                                <td>April 12, 2025</td>
+                            </tr>
+                            <tr>
+                                <td>Acceptance notification of shared-task papers</td>
+                                <td>April 30, 2025</td>
+                            </tr>
+                            <tr>
+                                <td>Camera ready paper deadline</td>
+                                <td>May 16, 2025</td>
+                            </tr>
+                            
+
+
+                            <!-- <tr>
+                                <td><b style="color: red">Challenge Paper Submission Deadline</b>(follow <a href="https://2024.acmmm.org/important-dates">MM2024 Workshop Dates</a>)</td>
+                                <td><b style="color: red">August 19, 2024</b></td>
+                            </tr> -->
+
+                        </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
             
             
             <div class="columns is-centered has-text-centered">
