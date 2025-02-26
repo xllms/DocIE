@@ -359,9 +359,6 @@
 
                                             <li> <b>Strict Mode</b>: Participants require to accurately extract all entities mentions and their relations. In this setting, we strictly compare the difference between the ground true and the predicted results. Therefore, if the head entity mention and tail entity mention are replaced by another mention in the same mention set, we will consider the sample was <b>not</b> predicted correctly. \(TP_{\text{RES}}\) is the number of triples predicted correctly in strict mode. And based on the above discrimination criteria and the basic metric, \(F1_{RES}\) can be calculated as the evaluation metric of this subtask</li>
                                         </ul>
-                                        <p>
-                                            The final test set evaluation will be available on March 20th in CodeBench. Participants can currently self-evaluate the provided training or development sets using the evaluation script we’ve provided. Final results will be calculated using the same evaluation methods.
-                                        </p>
                                 </div>
                             </div>
                         </div>
@@ -384,6 +381,9 @@
                             <!--Add Link Here-->
                             Baseline code and full data will publish as soon as possible.
                         </p>
+                        <p style="color: red;">
+                            <b>The final test set evaluation will be available on March 20th in CodeBench. Participants can currently self-evaluate the provided training or development sets using the evaluation script we’ve provided. Final results will be calculated using the same evaluation methods.</b>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -398,7 +398,7 @@
                     <div class="content has-text-justified">
                         <p>
                             <!-- Our challenge aims to explore the domain transfer ability of LLM in document-level information extraction (DocIE) tasks in low-resource scenarios. Therefore, the dataset we provide contains document data from 34 different domains. Among them, we divide the datasets of 5 domains into training sets, the datasets of 2 domains into validation sets, and the datasets of the remaining multiple domains as test sets. The data of each domain contains 8-10 documents. -->
-                            Our challenge seeks to investigate the domain transfer capabilities of large language models (LLMs) in document-level information extraction (DocIE) tasks, particularly in low-resource settings. To this end, we present a dataset that encompasses document data from 34 distinct domains. The dataset is divided as follows: 5 domains are designated for training, 2 domains for validation, and the remaining domains are allocated as test sets. Each domain dataset consists of 8 to 10 documents.
+                            Our challenge seeks to investigate the domain transfer capabilities of large language models (LLMs) in document-level information extraction (DocIE) tasks, particularly in low-resource settings. To this end, we present a dataset that encompasses document data from many distinct domains. The dataset is divided as follows: <b>5 domains are designated for training, 2 domains for validation, and the remaining domains are allocated as test sets. Each domain dataset consists of 8 to 10 documents.</b>
                         </p>
                         <p>
                             <!-- Participants can use the training set we provide to train their own information extraction model and make predictions on the test set data we provide. <b>It is worth noting that we allow participants to use additional data for training.</b> Participants need to use the trained model to make predictions on the test set we provide, and organize the test results into the following format. -->
@@ -464,30 +464,10 @@
 ]
 </pre>
                       
-<!--                         <p>
-                            Link to <a href="#">Codalab</a>
-                        </p> -->
-                       
                     </div>
                 </div>
             </div>
 
-
-            
-        
-             <!-- <div class="columns is-centered has-text-centered">
-                <div class="column is-four-fifths">
-                    <h2 class="title is-3">Registration</h2>
-                    <div class="content has-text-justified">
-                        <p>
-                             Welcome and please apply for the VSD challenge via a form at <a href="https://docs.google.com/forms/d/e/1FAIpQLSfuKXhaN5qa61rWlwaE3VpJD5FHcVLH25Un95wch6fCKiXIGQ/viewform?usp=sf_link">this link</a>.
-                        </p>
-                        <p>
-                            Feel free to contact us at <a href="mailto: vsdchallenge@gmail.com">vsdchallenge@gmail.com</a>.
-                        </p>
-                    </div>
-                </div>
-            </div> -->
 
             <div class="columns is-centered has-text-centered">
                 <div id="timeline" class="column is-four-fifths">
@@ -512,7 +492,7 @@
                             </tr>
                             <tr>
                                 <td>Shared-task paper submission deadline</td>
-                                <td>April 12, 2025</td>
+                                <td>April 20, 2025</td>
                             </tr>
                             <tr>
                                 <td>Acceptance notification of shared-task papers</td>
@@ -522,14 +502,6 @@
                                 <td>Camera ready paper deadline</td>
                                 <td>May 16, 2025</td>
                             </tr>
-                            
-
-
-                            <!-- <tr>
-                                <td><b style="color: red">Challenge Paper Submission Deadline</b>(follow <a href="https://2024.acmmm.org/important-dates">MM2024 Workshop Dates</a>)</td>
-                                <td><b style="color: red">August 19, 2024</b></td>
-                            </tr> -->
-
                         </tbody>
                         </table>
                     </div>
@@ -569,15 +541,11 @@
                     <h2 class="title is-3">References</h2>
                     <div class="content has-text-justified">
                         <p>
-                            
                             [1] Yao, Yuan, et al. "DocRED: A large-scale document-level relation extraction dataset." arXiv preprint arXiv:1906.06127 (2019).
                         </p>
-
                         <p>
-                            
                             [2] Tan, Qingyu, et al. "Revisiting DocRED--Addressing the False Negative Problem in Relation Extraction." arXiv preprint arXiv:2205.12696 (2022).
                         </p>
-
                         <p>
                             [3] Li, Junpeng, Zixia Jia, and Zilong Zheng. "Semi-automatic data enhancement for document-level relation extraction with distant supervision from large language models." arXiv preprint arXiv:2311.07314 (2023).
                         </p>
@@ -592,36 +560,5 @@
             </div>
         </div>
     </section>
-
-
-
 </body>
-<script>
-    // function jsonShowFn(json){
-    //     if (!json.match("^\{(.+:.+,*){1,}\}$")) {
-    //         return json           //判断是否是json数据，不是直接返回
-    //     }
-
-    //     if (typeof json != 'string') {
-    //         json = JSON.stringify(json, undefined, 2);
-    //     }
-    //     json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-    //     return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function(match) {
-    //         var cls = 'number';
-    //         if (/^"/.test(match)) {
-    //             if (/:$/.test(match)) {
-    //                 cls = 'key';
-    //             } else {
-    //                 cls = 'string';
-    //             }
-    //         } else if (/true|false/.test(match)) {
-    //             cls = 'boolean';
-    //         } else if (/null/.test(match)) {
-    //             cls = 'null';
-    //         }
-    //         return '<span class="' + cls + '">' + match + '</span>';
-    //     });
-    // }
-    // $('#jsonShow').html(jsonShowFn('[{"imd_id":1,"triple_list":["s":"book","o":"table"]}]'));
-</script>
 </html>
