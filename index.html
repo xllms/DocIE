@@ -384,9 +384,16 @@
                             <!--Add Link Here-->
                             Baseline code and full data will publish as soon as possible.
                         </p>
-                        <p style="color: red;">
+                        <!-- <p style="color: red;">
                             <b>The final test set evaluation will be available on March 20th in CodeBench. Participants can currently self-evaluate the provided training or development sets using the evaluation script we’ve provided. Final results will be calculated using the same evaluation methods.</b>
+                        </p> -->
+                        <p style="color: red;">
+                            The evaluation code is available on <a href="https://github.com/xllms/DocIE/blob/main/scoring.py">Github</a>. Participants need to specify the paths for the prediction results file (results.json), the GroundTruth file (reference.json), and the result saving path (scores.json) in the evaluation script (scoring.py), and then run the evaluation script using the following command:
                         </p>
+                        <pre>
+                            <code>
+python scoring.py</code>
+                        </pre>
                     </div>
                 </div>
             </div>
